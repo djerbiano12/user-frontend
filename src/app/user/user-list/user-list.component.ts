@@ -42,8 +42,15 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  deleteUser(user: User) {
-    console.log('Delete User');
+   deleteUser(user: User) {
+    if (user) {
+      this.userService.deleteUser(user.id).subscribe(
+        res => {
+          this.getAllUsers();
+          this.router.navigate(['/user']);
+        }
+      );
+    }
   }
 
 }
