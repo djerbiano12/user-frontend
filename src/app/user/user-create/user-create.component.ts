@@ -33,7 +33,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
       email: new FormControl('', [
         Validators.required,
         Validators.pattern("[^ @]*@[^ @]*")
-      ])
+      ]),
+      password: new FormControl('', Validators.required)
     });
 
 
@@ -46,6 +47,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            password: user.password
           });
          },error => {
           console.log(error);
@@ -67,13 +69,15 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         let user: User = new User(this.id,
           this.userForm.controls['firstName'].value,
           this.userForm.controls['lastName'].value,
-          this.userForm.controls['email'].value);
+          this.userForm.controls['email'].value,
+          this.userForm.controls['password'].value);
           this.userService.updateUser(user).subscribe();
       } else {
         let user: User = new User(null,
           this.userForm.controls['firstName'].value,
           this.userForm.controls['lastName'].value,
-          this.userForm.controls['email'].value);
+          this.userForm.controls['email'].value,
+          this.userForm.controls['password'].value);
         this.userService.createUser(user).subscribe();
 
       }
