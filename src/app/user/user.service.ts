@@ -26,4 +26,8 @@ export class UserService {
   deleteUser(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
   }
+
+  canConnect(email: string, password: string) {
+    return this.http.get<Boolean>(this.baseUrl + '/' + email + '/auth/' + password);
+  }
 }

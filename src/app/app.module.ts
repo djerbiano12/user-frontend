@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { HttpModule } from '@angular/http';
 import { UserService } from "./user/user.service";
+import { EncrDecrService } from "./user/encr-decr-service.service";
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -19,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, EncrDecrService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

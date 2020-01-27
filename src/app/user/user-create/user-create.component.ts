@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
+import { EncrDecrService } from "../encr-decr-service.service";
 import {User} from "../User";
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -17,10 +18,13 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   userForm: FormGroup;
   private sub: any;
+  conversionEncryptOutput:string;  
+  conversionDecryptOutput:string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private userService: UserService) { }
+              private userService: UserService, 
+              private EncrDecr: EncrDecrService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -37,8 +41,6 @@ export class UserCreateComponent implements OnInit, OnDestroy {
       password: new FormControl('', Validators.required)
     });
 
-
-
     if (this.id) { //edit form
       this.userService.getUserById(this.id).subscribe(
         user => {
@@ -47,7 +49,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            password: user.password
+            password: this.EncrDecr.get('123456$#@$^@1ERF', user.password)
           });
          },error => {
           console.log(error);
@@ -55,8 +57,6 @@ export class UserCreateComponent implements OnInit, OnDestroy {
       );
 
     }
-
-
   }
 
   ngOnDestroy(): void {
@@ -70,14 +70,15 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['firstName'].value,
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
-          this.userForm.controls['password'].value);
+          this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value));
           this.userService.updateUser(user).subscribe();
+
       } else {
         let user: User = new User(null,
           this.userForm.controls['firstName'].value,
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
-          this.userForm.controls['password'].value);
+          this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value));
         this.userService.createUser(user).subscribe();
 
       }
@@ -92,5 +93,4 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     this.router.navigate(['/user']);
 
   }
-
 }
