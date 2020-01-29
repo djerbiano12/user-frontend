@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {User} from "./User";
 
 @Injectable()
@@ -28,6 +28,9 @@ export class UserService {
   }
 
   canConnect(email: string, password: string) {
-    return this.http.get<Boolean>(this.baseUrl + '/' + email + '/auth/' + password);
+    const params = new HttpParams()
+    .set('email', email)
+    .set('password', password);
+    return this.http.get<Boolean>(this.baseUrl + '/auth' , {params});
   }
 }
