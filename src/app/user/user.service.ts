@@ -9,23 +9,23 @@ export class UserService {
   baseUrl: string = 'http://localhost:8090/users';
 
   getUsers() {
-    return this.http.get<User[]>(this.baseUrl);
+    return this.http.get<User[]>(this.baseUrl + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
   }
 
   getUserById(id: number) {
-    return this.http.get<User>(this.baseUrl + '/' + id);
+    return this.http.get<User>(this.baseUrl + '/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
   }
 
   createUser(user: User) {
-    return this.http.post(this.baseUrl, user);
+    return this.http.post(this.baseUrl + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, user);
   }
 
   updateUser(user: User) {
-    return this.http.put(this.baseUrl, user);
+    return this.http.put(this.baseUrl + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, user);
   }
 
   deleteUser(id: number) {
-    return this.http.delete(this.baseUrl + '/' + id);
+    return this.http.delete(this.baseUrl + '/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
   }
 
   canConnect(email: string, password: string) {

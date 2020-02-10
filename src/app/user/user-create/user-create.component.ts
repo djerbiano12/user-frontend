@@ -44,13 +44,14 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     if (this.id) { //edit form
       this.userService.getUserById(this.id).subscribe(
         user => {
+            this.userForm.reset();
             this.id = user.id;
             this.userForm.patchValue({
             firstName: user.firstName,
             lastName: user.lastName,
-            email: user.email,
-            password: this.EncrDecr.get('123456$#@$^@1ERF', user.password)
+            email: user.email
           });
+            console.log(user);
          },error => {
           console.log(error);
          }
@@ -91,6 +92,5 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   redirectUserPage() {
     this.router.navigate(['/user']);
-
   }
 }

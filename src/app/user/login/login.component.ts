@@ -25,17 +25,12 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    //this.userService.canConnect(this.loginForm.controls.email.value, this.EncrDecr.set('123456$#@$^@1ERF', this.loginForm.controls.password.value))
-    //.subscribe((value) => { if(value == true){ this.router.navigate(['user']); } else {this.invalidLogin = true;}});
-
      const body = new HttpParams()
       .set('username', this.loginForm.controls.email.value)
-      //.set('password', this.EncrDecr.set('123456$#@$^@1ERF', this.loginForm.controls.password.value))
-      .set('password', this.loginForm.controls.password.value)
+      .set('password', this.EncrDecr.set('123456$#@$^@1ERF', this.loginForm.controls.password.value))
       .set('grant_type', 'password');
     this.userService.login(body).subscribe(data => {
       window.sessionStorage.setItem('token', JSON.stringify(data));
-      console.log(window.sessionStorage.getItem('token'));
       this.router.navigate(['user']);
     }, error => {
       this.invalidLogin = true;
