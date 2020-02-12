@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {User} from "./User";
 
 @Injectable()
@@ -26,21 +26,5 @@ export class UserService {
 
   deleteUser(id: number) {
     return this.http.delete(this.baseUrl + '/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
-  }
-
-  canConnect(email: string, password: string) {
-    const params = new HttpParams()
-    .set('email', email)
-    .set('password', password);
-    return this.http.get<Boolean>(this.baseUrl + '/auth' , {params});
-  }
-
-  login(loginPayload) {
-    const headers = {
-      'Authorization': 'Basic ' + btoa('devglan-client:devglan-secret'),
-      'Content-type': 'application/x-www-form-urlencoded'
-    }
-
-    return this.http.post('http://localhost:8090/' + 'oauth/token', loginPayload, {headers});
   }
 }

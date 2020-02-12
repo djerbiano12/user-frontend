@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthentificationService } from './authentification.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'user-app-angular-test';
+
+constructor(
+        private router: Router,
+        private authService: AuthentificationService
+    ) {
+        }
+
+  logout() {
+        this.authService.logout();
+        this.router.navigate(['/login']);
+    }
+
+   getCanConnected(){
+     return this.authService.connected;
+   }
 }

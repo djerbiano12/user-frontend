@@ -1,1 +1,9 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="getCanConnected()">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="users">Users List</a>
+        <a class="nav-item nav-link" routerLink="create_user" >Create user</a>
+        <a class="nav-item nav-link" (click)="logout()" href="">Logout</a>
+    </div>
+</nav>
 <router-outlet></router-outlet>
