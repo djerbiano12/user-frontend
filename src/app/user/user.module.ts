@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserCreateComponent } from './user-create/user-create.component';
 import { UserService } from './user.service';
-import { LoginComponent } from './login/login.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import  { routingComponents } from '../app-routing.module'
+
 
 
 @NgModule({
@@ -18,6 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],providers:[
   	UserService
   ],
-  declarations: [UserListComponent, UserCreateComponent, LoginComponent]
+  declarations: [routingComponents]
 })
 export class UserModule { }
