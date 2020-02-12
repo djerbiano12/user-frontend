@@ -85,12 +85,12 @@ export class UserCreateComponent implements OnInit, OnDestroy {
       }
 
       this.userForm.reset();
-      this.router.navigate(['/user']);
+      this.router.navigate(['/users']);
 
     }
   }
 
   redirectUserPage() {
-    this.router.navigate(['/user']);
+    this.router.navigate(['/users']);
   }
 }
