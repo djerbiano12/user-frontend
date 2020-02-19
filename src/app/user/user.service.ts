@@ -16,6 +16,10 @@ export class UserService {
     return this.http.get<User>(this.baseUrl + '/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
   }
 
+  getUserByEmail(email: string) {
+    return this.http.get<User>(this.baseUrl + '/email/' + email + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
+  }
+
   createUser(user: User) {
     return this.http.post(this.baseUrl + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, user);
   }

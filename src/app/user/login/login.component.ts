@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { AuthentificationService } from "../../authentification.service";
+import { UserService } from "../user.service";
 import { EncrDecrService } from "../encr-decr-service.service";
 import {Router} from "@angular/router";
 import {first} from "rxjs/operators";
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   invalidLogin: boolean = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthentificationService,
-              private EncrDecr: EncrDecrService) { }
+              private userService: UserService, private EncrDecr: EncrDecrService) { }
 
   onSubmit() {
     this.submitted = true;
@@ -31,8 +32,7 @@ export class LoginComponent implements OnInit {
       .set('grant_type', 'password');
     this.authService.login(body).subscribe(data => {
       window.sessionStorage.setItem('token', JSON.stringify(data));
-      this.authService.connected = true;
-      this.router.navigate(['users']);
+      this.userService.getUserByEmail(this.loginForm.controls.email.value).subscribe(user => this.authService.updateConnectionInformation(user));
     }, error => {
       this.invalidLogin = true;
     });

@@ -51,7 +51,6 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             lastName: user.lastName,
             email: user.email
           });
-            console.log(user);
          },error => {
           console.log(error);
          }
