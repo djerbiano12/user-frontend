@@ -36,7 +36,7 @@ export class AuthentificationService {
     this.router.navigate(['users']);
     let listeRoles = user['roles'].map(a => a.name);
     if(listeRoles.indexOf(Role.Admin) > -1){
-       console.log('c un admin');
+       this.admin = true;
       }
   }
 }

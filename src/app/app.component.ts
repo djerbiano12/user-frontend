@@ -25,4 +25,8 @@ constructor(
    getCanConnected(){
      return this.authService.connected;
    }
+
+   isAdmin(){
+       return this.authService.admin;
+     }
 }

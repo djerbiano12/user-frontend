@@ -27,7 +27,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Operation</th>
+            <th *ngIf="isAdmin()">Operation</th>
           </tr>
           </thead>
           <tbody>
@@ -36,7 +36,7 @@
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
-            <td>
+            <td *ngIf="isAdmin()">
               <button type="button" class="btn btn-success" (click)="editUserPage(user)">Edit</button>
               <button type="button" class="btn btn-danger" (click)="deleteUser(user)"><span class="glyphicon glyphicon-search"></span> Delete</button>
             </td>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "../User";
 import { UserService } from "../user.service";
+import { AuthentificationService } from "../../authentification.service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +15,7 @@ export class UserListComponent implements OnInit {
   private users: User[];
 
   constructor(private router: Router,
-              private userService: UserService) { }
+              private userService: UserService, private authService: AuthentificationService) { }
 
   ngOnInit() {
     this.getAllUsers();
@@ -51,6 +52,10 @@ export class UserListComponent implements OnInit {
         }
       );
     }
+  }
+
+  isAdmin(){
+     return this.authService.admin;
   }
 
 }
