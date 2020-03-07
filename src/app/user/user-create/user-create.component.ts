@@ -71,7 +71,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value));
-          this.userService.updateUser(user).subscribe();
+          this.userService.updateUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
 
       } else {
         let user: User = new User(null,
@@ -79,12 +79,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value));
-        this.userService.createUser(user).subscribe();
+        this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
 
       }
 
       this.userForm.reset();
-      this.router.navigate(['/users']);
 
     }
   }
