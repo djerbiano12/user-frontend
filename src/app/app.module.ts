@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { HttpModule } from '@angular/http';
-import { UserService } from "./user/user.service";
+import { UserService } from "./services/user.service";
 import { EncrDecrService } from "./user/encr-decr-service.service";
 import { HttpClientModule } from '@angular/common/http';
 

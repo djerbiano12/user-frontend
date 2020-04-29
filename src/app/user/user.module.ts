@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import  { routingComponents } from '../app-routing.module'
 

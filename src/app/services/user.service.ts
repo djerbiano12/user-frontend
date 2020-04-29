@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import {User} from "./User";
+import {User} from "../user/User";
+import { Role } from '../user/role';
 
 @Injectable()
 export class UserService {
@@ -30,5 +31,15 @@ export class UserService {
 
   deleteUser(id: number) {
     return this.http.delete(this.baseUrl + '/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
+  }
+
+  getUserWithSelectedRole(user: User){
+    let listeRoles = user['roles'].map(a => a.name);
+    if(listeRoles.indexOf(Role.Admin) > -1){
+       user.role = Role.Admin;
+      } else if(listeRoles.indexOf(Role.User) > -1){
+        user.role = Role.User;
+      }
+      return user;
   }
 }

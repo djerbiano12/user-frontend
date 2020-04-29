@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../user.service";
+import {UserService } from "../../services/user.service";
+import {RoleService } from "../role.service";
 import { EncrDecrService } from "../encr-decr-service.service";
 import {User} from "../User";
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,6 +16,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   id: number;
   user: User;
+  roles: string[];
 
   userForm: FormGroup;
   private sub: any;
@@ -23,7 +25,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private userService: UserService, 
+              private userService: UserService,
+              private roleService: RoleService, 
               private EncrDecr: EncrDecrService) { }
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.pattern("[^ @]*@[^ @]*")
       ]),
+      role :new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
 
@@ -49,7 +53,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             this.userForm.patchValue({
             firstName: user.firstName,
             lastName: user.lastName,
-            email: user.email
+            email: user.email,
+            role: this.userService.getUserWithSelectedRole(user).role
           });
          },error => {
           console.log(error);
@@ -57,6 +62,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
       );
 
     }
+    this.getAllRoles();
   }
 
   ngOnDestroy(): void {
@@ -70,7 +76,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['firstName'].value,
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
-          this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value));
+          this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
+          this.userForm.controls['role'].value);
           this.userService.updateUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
 
       } else {
@@ -78,7 +85,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['firstName'].value,
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
-          this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value));
+          this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
+          this.userForm.controls['role'].value);
         this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
 
       }
@@ -86,6 +94,18 @@ export class UserCreateComponent implements OnInit, OnDestroy {
       this.userForm.reset();
 
     }
+  }
+
+  getAllRoles() {
+    this.roleService.getRoles().subscribe(
+      roles => {
+        this.roles = roles;
+      },
+      err => {
+        console.log(err);
+      }
+
+    );
   }
 
   redirectUserPage() {

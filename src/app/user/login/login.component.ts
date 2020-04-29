@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { AuthentificationService } from "../../authentification.service";
-import { UserService } from "../user.service";
+import { AuthentificationService } from "../../services/authentification.service";
+import { UserService } from "../../services/user.service";
 import { EncrDecrService } from "../encr-decr-service.service";
 import {Router} from "@angular/router";
 import {first} from "rxjs/operators";
