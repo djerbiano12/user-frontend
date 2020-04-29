@@ -37,8 +37,9 @@
             <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
             <td *ngIf="isAdmin()">
-              <button type="button" class="btn btn-success" (click)="editUserPage(user)">Edit</button>
-              <button type="button" class="btn btn-danger" (click)="deleteUser(user)"><span class="glyphicon glyphicon-search"></span> Delete</button>
+              <button type="button" (click)="editUserPage(user)" title= "Edit" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-pencil"></i></button>
+
+              <button type="button" (click)="deleteUser(user)" title= "Delete" class="btn btn-danger btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
             </td>
           </tr>
 
