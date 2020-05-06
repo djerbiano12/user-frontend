@@ -3,6 +3,7 @@ import { User } from "../User";
 import { UserService } from "../../services/user.service";
 import { AuthentificationService } from "../../services/authentification.service";
 import { Router } from '@angular/router';
+import { MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-user-list',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 })
 export class UserListComponent implements OnInit {
 
-  private users: User[];
+  private dataSource: MatTableDataSource<User>;
+  private displayedColumns: string[] = ['id','firstName', 'lastName', 'email'];
 
   constructor(private router: Router,
               private userService: UserService, private authService: AuthentificationService) { }
@@ -24,7 +26,7 @@ export class UserListComponent implements OnInit {
   getAllUsers() {
     this.userService.getUsers().subscribe(
       users => {
-        this.users = users;
+        this.dataSource = new MatTableDataSource(users);
       },
       err => {
         console.log(err);
@@ -55,6 +57,9 @@ export class UserListComponent implements OnInit {
   }
 
   isAdmin(){
+    if(this.authService.admin && !this.displayedColumns.includes('operations')){
+        this.displayedColumns.push('operations');
+      }
      return this.authService.admin;
   }
 

@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserService } from '../services/user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import  { routingComponents } from '../app-routing.module'
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -13,7 +14,8 @@ import  { routingComponents } from '../app-routing.module'
     CommonModule,
     UserRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ],providers:[
   	UserService
   ],
