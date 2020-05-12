@@ -20,7 +20,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['id','firstName', 'lastName', 'email'];
 
   length = 100;
-  pageSize = 3;
+  pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
   // get refereence to paginator
