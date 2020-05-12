@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from "../User";
 import { UserService } from "../../services/user.service";
 import { AuthentificationService } from "../../services/authentification.service";
 import { Router } from '@angular/router';
-import { MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-list',
@@ -15,6 +17,12 @@ export class UserListComponent implements OnInit {
 
   private dataSource: MatTableDataSource<User>;
   private displayedColumns: string[] = ['id','firstName', 'lastName', 'email'];
+
+  length = 100;
+  pageSize = 3;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private router: Router,
               private userService: UserService, private authService: AuthentificationService) { }
@@ -56,6 +64,17 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+
   isAdmin(){
     if(this.authService.admin && !this.displayedColumns.includes('operations')){
         this.displayedColumns.push('operations');
@@ -63,4 +82,7 @@ export class UserListComponent implements OnInit {
      return this.authService.admin;
   }
 
+   ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 }

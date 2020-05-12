@@ -20,6 +20,8 @@
 
       <section class="main">
 
+        <input matInput (keyup)="applyFilter($event)" class="filter" placeholder="Search contact (Ex: user)">
+
         <table mat-table [dataSource] = "dataSource" class = "table mat-elevation-z8"> 
           <ng-container matColumnDef = "id">
             <th mat-header-cell *matHeaderCellDef>#</th>
@@ -49,6 +51,10 @@
          <tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr>
        </table>
       </section>
+        <mat-paginator #paginator
+                 [pageSize]="3"
+                 [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
     </div>
   </div>
 </div>

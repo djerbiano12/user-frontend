@@ -15,3 +15,13 @@
   line-height: 1.33;
   border-radius: 25px;
 }
+
+.filter {
+  font-size: 14px;
+  width: 100%;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+}
