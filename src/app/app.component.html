@@ -4,8 +4,8 @@
 <!-- nav -->
 <nav class="navbar navbar-expand navbar-dark navbar-custom " *ngIf="getCanConnected()">
     <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="users"><b>Users List</b></a>
-        <a class="nav-item nav-link" routerLink="create_user" *ngIf="isAdmin()"><b>Create user</b></a>
+        <a class="nav-item nav-link" routerLink="users"><b>Contacts List</b></a>
+        <a class="nav-item nav-link" routerLink="create_user" *ngIf="isAdmin()"><b>Create contact</b></a>
         <a class="nav-item nav-link" (click)="logout()" href=""><b>Logout</b></a>
     </div>
 </nav>

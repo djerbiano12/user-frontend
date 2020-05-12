@@ -7,7 +7,7 @@ import { Role } from '../user/role';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:8070/users';
+  baseUrl: string = 'http://localhost:8090/users';
 
   getUsers() {
     return this.http.get<User[]>(this.baseUrl + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);

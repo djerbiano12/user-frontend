@@ -25,3 +25,7 @@
   border-bottom-style: groove;
   background-color: #eee;
 }
+
+.mat-elevation-z8{
+  width: 100%;
+}
