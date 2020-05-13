@@ -6,9 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import  { routingComponents } from '../app-routing.module'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSelectModule} from '@angular/material/select';
+import { MaterialModule } from './../../material/material.module';
+
 
 @NgModule({
   imports: [
@@ -16,16 +15,13 @@ import {MatSelectModule} from '@angular/material/select';
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSelectModule,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    MaterialModule
 
   ],providers:[
   	UserService
   ],
-  declarations: [routingComponents],
-  exports: [  MatTableModule,  MatPaginatorModule, MatSelectModule]
+  declarations: [routingComponents]
 })
 export class UserModule { }

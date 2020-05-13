@@ -3,10 +3,9 @@ import { User } from "../User";
 import { UserService } from "../../services/user.service";
 import { AuthentificationService } from "../../services/authentification.service";
 import { Router } from '@angular/router';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-user-list',
@@ -18,6 +17,8 @@ export class UserListComponent implements OnInit {
 
   dataSource: MatTableDataSource<User>;
   displayedColumns: string[] = ['id','firstName', 'lastName', 'email'];
+  users: User[];
+  sortedData: User[];
 
   length = 100;
   pageSize = 5;
@@ -25,6 +26,7 @@ export class UserListComponent implements OnInit {
 
   // get refereence to paginator
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private router: Router,
               private userService: UserService, private authService: AuthentificationService) { }
@@ -39,8 +41,11 @@ export class UserListComponent implements OnInit {
   getAllUsers() {
     this.userService.getUsers().subscribe(
       users => {
+        this.users = users;
         this.dataSource = new MatTableDataSource(users);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.sortedData = users.slice();
       },
       err => {
         console.log(err);
@@ -82,8 +87,10 @@ export class UserListComponent implements OnInit {
   }
 
   isAdmin(){
-    if(this.authService.admin && !this.displayedColumns.includes('operations')){
-        this.displayedColumns.push('operations');
+    if(this.authService.admin && !this.displayedColumns.includes('show')){
+      this.displayedColumns.push('show');
+        this.displayedColumns.push('update');
+        this.displayedColumns.push('delete');
       }
      return this.authService.admin;
   }
