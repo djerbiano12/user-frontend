@@ -42,7 +42,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         Validators.pattern("[^ @]*@[^ @]*")
       ]),
       role :new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      password: new FormControl('', Validators.required),
+      phoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern("([0-9]{10})")
+      ])
     });
 
     if (this.id) { //edit form
@@ -54,7 +58,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            role: this.userService.getUserWithSelectedRole(user).role
+            role: this.userService.getUserWithSelectedRole(user).role,
+            phoneNumber: user.phoneNumber
           });
          },error => {
           console.log(error);
@@ -77,7 +82,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
-          this.userForm.controls['role'].value);
+          this.userForm.controls['role'].value,
+          this.userForm.controls['phoneNumber'].value);
           this.userService.updateUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
 
       } else {
@@ -86,7 +92,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.userForm.controls['lastName'].value,
           this.userForm.controls['email'].value,
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
-          this.userForm.controls['role'].value);
+          this.userForm.controls['role'].value,
+          this.userForm.controls['phoneNumber'].value);
         this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
 
       }

@@ -1,60 +1,65 @@
 <table>
   <tr>
     <td>
-      <img src="assets/img/accueil.png" alt="image" width="170" height="150" />
+      <img src="assets/img/accueil.png" alt="image" width="150" height="130" />
     </td>
     <td>
       <div class="container">
-  <div class="row justify-content-md-center">
-    <div class="col-lg-6">
-      <section>
-        <form novalidate [formGroup]="userForm" (ngSubmit)="onSubmit()">
-          <fieldset>
-            <div class="form-group">
-              <label>First Name</label>
-              <input type="text"
-                     class="form-control"
-                     formControlName="firstName">
-            </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-6">
+          <section>
+            <form novalidate [formGroup]="userForm" (ngSubmit)="onSubmit()">
+              <fieldset>
+                <div class="form-group">
+                  <label><mat-icon>person_pin</mat-icon>First Name</label>
+                  <input type="text"
+                         class="form-control"
+                         formControlName="firstName">
+                </div>
 
-            <div class="form-group">
-              <label>Last Name</label>
-              <input type="text"
-                     class="form-control"
-                     formControlName="lastName">
-            </div>
+                <div class="form-group">
+                  <label><mat-icon>person_pin</mat-icon>Last Name</label>
+                  <input type="text"
+                         class="form-control"
+                         formControlName="lastName">
+                </div>
 
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email"
-                     class="form-control"
-                     formControlName="email">
-            </div>
+                <div class="form-group">
+                    <label><mat-icon>phone</mat-icon>Phone number</label>
+                    <input type="text" class="form-control" formControlName="phoneNumber">
+                    <mat-hint>(Exclude area code)</mat-hint>
+                </div>
 
-            <div class="form-group">
-              <label>Rôle</label>
-              <select class="form-control"
-                     formControlName="role">
-                <option [value]="role" *ngFor="let role of roles">
-                    {{role}}
-                </option>
-              </select>
-            </div>
+                <div class="form-group">
+                  <label><mat-icon>email</mat-icon>Email</label>
+                  <input type="email"
+                         class="form-control"
+                         formControlName="email">
+                </div>
 
-            <div class="form-group">
-              <label>Password</label>
-              <input type="password"
-                     class="form-control"
-                     formControlName="password">
-            </div>
-          </fieldset>
-          
-          <button type="submit" class="btn btn-primary"  [disabled]="!userForm.valid" >Submit</button>
-          <button type="button" class="btn btn-warning" (click)="redirectUserPage()">Cancel</button>
-          <pre>{{userForm.value | json}}</pre>
-        </form>
-      </section>
-    </div>
+                <div class="form-group">
+                  <label><mat-icon>person</mat-icon>Rôle</label>
+                  <select class="form-control"
+                         formControlName="role">
+                    <option [value]="role" *ngFor="let role of roles">
+                        {{role}}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label><mat-icon>vpn_key</mat-icon>Password</label>
+                  <input type="password"
+                         class="form-control"
+                         formControlName="password">
+                </div>
+              </fieldset>
+              
+              <button type="submit" class="btn btn-primary form-btn"  [disabled]="!userForm.valid" ><mat-icon>person_add</mat-icon>Submit</button>
+              <button type="button" class="btn btn-warning form-btn" (click)="redirectUserPage()"><mat-icon>cancel</mat-icon>Cancel</button>
+            </form>
+          </section>
+        </div>
   </div>
 </div>
 </td>

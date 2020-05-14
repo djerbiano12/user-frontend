@@ -16,7 +16,7 @@ import { MatSort} from '@angular/material/sort';
 export class UserListComponent implements OnInit {
 
   dataSource: MatTableDataSource<User>;
-  displayedColumns: string[] = ['id','firstName', 'lastName', 'email'];
+  displayedColumns: string[] = ['id','firstName', 'lastName','phoneNumber', 'email'];
   users: User[];
   sortedData: User[];
 
