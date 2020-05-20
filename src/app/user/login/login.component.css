@@ -38,3 +38,8 @@
 .login-container{
     margin-bottom: 5%;
 }
+
+#logo
+{
+    position: relative 
+}

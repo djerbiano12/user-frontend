@@ -64,6 +64,12 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  displayUserPage(user: User) {
+    if (user) {
+      this.router.navigate(['/user/display', user.id]);
+    }
+  }
+
    deleteUser(user: User) {
     if (user) {
       this.userService.deleteUser(user.id).subscribe(

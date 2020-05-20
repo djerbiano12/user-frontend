@@ -57,7 +57,7 @@
         <ng-container matColumnDef="show" *ngIf="isAdmin()">
             <th mat-header-cell *matHeaderCellDef> Details </th>
             <td mat-cell *matCellDef="let user">
-              <button mat-icon-button color="primary" (click)="editUserPage(user)">
+              <button mat-icon-button color="primary" (click)="displayUserPage(user)">
                   <mat-icon>visibility</mat-icon>
               </button>
             </td>

@@ -1,0 +1,27 @@
+<div class="row">
+<img src="assets/img/accueil.png" alt="image" width="150" height="130" />
+<div class="container col-lg-6">
+	<div class="row justify-content-md-center">
+
+		<label class="col-lg-6"><mat-icon>person_pin</mat-icon>First Name</label>
+		<label class="col-lg-6 label_value">{{user.firstName}}</label> 
+
+		<label class="col-lg-6"><mat-icon>person_pin</mat-icon>Last Name</label>
+		<label class="col-lg-6 label_value">{{user.lastName}}</label>
+
+		<label class="col-lg-6"><mat-icon>phone</mat-icon>Phone number</label>
+		<label class="col-lg-6 label_value">{{user.phoneNumber}}</label>
+
+		<label class="col-lg-6"><mat-icon>email</mat-icon>Email</label>
+		<label class="col-lg-6 label_value">{{user.email}}</label>
+
+		<label class="col-lg-6"><mat-icon>person</mat-icon>Rôle</label>
+		<label class="col-lg-6 label_value">{{user.role}}</label>
+
+		<label class="col-lg-12"></label>
+		  
+		  <button type="button" class="btn btn-warning form-btn" (click)="redirectUserPage()"><mat-icon>cancel</mat-icon>Cancel</button>
+	</div>
+	<img class="search_img" src="assets/img/search.jpg" alt="image" width="200" height="300" />
+</div>
+</div>

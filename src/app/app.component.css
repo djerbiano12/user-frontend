@@ -2,3 +2,13 @@
 .navbar-custom {
     background-color: #0062cc;
 }
+
+#fondecran {
+ /* Fixe l'image en haut à gauche de la page */
+ position: fixed; 
+ top: 0; 
+ left: 0; 
+ /* Préserve le ratio de l'image */
+ min-width: 100%;
+ min-height: 100%;
+}
