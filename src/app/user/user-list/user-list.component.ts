@@ -71,13 +71,15 @@ export class UserListComponent implements OnInit {
   }
 
    deleteUser(user: User) {
-    if (user) {
+     if(confirm("Are you sure to delete" + user.firstName + " "+ user.lastName )){
+      if (user) {
       this.userService.deleteUser(user.id).subscribe(
         res => {
           this.getAllUsers();
-          this.router.navigate(['/user']);
+          this.router.navigate(['/users']);
         }
       );
+    }
     }
   }
 

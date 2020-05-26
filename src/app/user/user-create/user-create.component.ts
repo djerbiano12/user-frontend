@@ -5,6 +5,7 @@ import {RoleService } from "../role.service";
 import { EncrDecrService } from "../encr-decr-service.service";
 import {User} from "../User";
 import {ActivatedRoute, Router} from '@angular/router';
+import { UniqueEmailValidatorDirective } from '../../directives/unique-email-validator.directive';
 
 @Component({
   selector: 'app-user-create',
@@ -117,5 +118,12 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   redirectUserPage() {
     this.router.navigate(['/users']);
+  }
+
+  isValidForm():boolean {
+    if(this.userForm.controls['firstName'].valid && this.userForm.controls['lastName'].valid && this.userForm.controls['password'].valid && this.userForm.controls['role'].valid && this.userForm.controls['phoneNumber'].valid && this.userForm.controls['email'].valid){
+      return true;
+    }
+    return false;
   }
 }

@@ -7,6 +7,8 @@ import  { routingComponents } from '../app-routing.module'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './../../material/material.module';
+import { UniqueEmailValidatorDirective } from '../directives/unique-email-validator.directive';
+
 
 @NgModule({
   imports: [
@@ -18,9 +20,10 @@ import { MaterialModule } from './../../material/material.module';
     BrowserModule,
     MaterialModule
 
-  ],providers:[
+  ],exports:[UniqueEmailValidatorDirective],
+  providers:[
   	UserService
   ],
-  declarations: [routingComponents]
+  declarations: [routingComponents, UniqueEmailValidatorDirective]
 })
 export class UserModule { }
