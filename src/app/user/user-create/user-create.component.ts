@@ -6,6 +6,7 @@ import { EncrDecrService } from "../encr-decr-service.service";
 import {User} from "../User";
 import {ActivatedRoute, Router} from '@angular/router';
 import { UniqueEmailValidatorDirective } from '../../directives/unique-email-validator.directive';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-user-create',
@@ -18,6 +19,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
   id: number;
   user: User;
   roles: string[];
+  editForm: boolean = false;
 
   userForm: FormGroup;
   private sub: any;
@@ -28,7 +30,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
               private router: Router,
               private userService: UserService,
               private roleService: RoleService, 
-              private EncrDecr: EncrDecrService) { }
+              private EncrDecr: EncrDecrService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -51,6 +54,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     });
 
     if (this.id) { //edit form
+      this.editForm = true;
       this.userService.getUserById(this.id).subscribe(
         user => {
             this.userForm.reset();
@@ -85,7 +89,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
           this.userForm.controls['role'].value,
           this.userForm.controls['phoneNumber'].value);
-          this.userService.updateUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
+          this.userService.updateUser(user).subscribe(users => {this.router.navigate(['/users']);this.notificationService.success('Contact successfully updated');},err => {console.log(err);});
 
       } else {
         let user: User = new User(null,
@@ -95,7 +99,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
           this.userForm.controls['role'].value,
           this.userForm.controls['phoneNumber'].value);
-        this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);},err => {console.log(err);});
+        this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);this.notificationService.success('Contact successfully added');},err => {console.log(err);});
 
       }
 
@@ -118,12 +122,6 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   redirectUserPage() {
     this.router.navigate(['/users']);
-  }
-
-  isValidForm():boolean {
-    if(this.userForm.controls['firstName'].valid && this.userForm.controls['lastName'].valid && this.userForm.controls['password'].valid && this.userForm.controls['role'].valid && this.userForm.controls['phoneNumber'].valid && this.userForm.controls['email'].valid){
-      return true;
-    }
-    return false;
+    this.notificationService.warn('No changes have been saved');
   }
 }

@@ -32,13 +32,16 @@
 
                 <div class="form-group">
                   <label><mat-icon>email</mat-icon>Email</label>
-                  <input id="email" name="email" type="email"
+                  <input *ngIf="!editForm" id="email" name="email" type="email"
                          class="form-control"
                          formControlName="email" uniqueEmail>
+                  <input *ngIf="editForm" id="email" name="email" type="email"
+                         class="form-control"
+                         formControlName="email">
                 </div>
 
                 <div class="text-danger" *ngIf="userForm.get('email').invalid">
-                   <div *ngIf="userForm.controls['email']?.errors?.uniqueEmail">Email already exists</div>
+                   <div *ngIf="userForm.controls['email']?.errors?.uniqueEmail && !editForm">Email already exists</div>
                  </div>
 
                 <div class="form-group">
@@ -59,7 +62,7 @@
                 </div>
               </fieldset>
               
-              <button type="submit" class="btn btn-primary form-btn"  [disabled]="!(isValidForm() && !userForm.controls['email']?.errors?.uniqueEmail)" ><mat-icon>person_add</mat-icon>Submit</button>
+              <button type="submit" class="btn btn-primary form-btn"  [disabled]="!userForm.valid" ><mat-icon>person_add</mat-icon>Submit</button>
               <button type="button" class="btn btn-warning form-btn" (click)="redirectUserPage()"><mat-icon>cancel</mat-icon>Cancel</button>
             </form>
           </section>

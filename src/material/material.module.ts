@@ -12,6 +12,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -28,7 +30,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   exports: [
     MatTabsModule,
@@ -42,7 +46,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

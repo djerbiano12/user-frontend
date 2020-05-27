@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort} from '@angular/material/sort';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { DialogService } from '../../services/dialog.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-user-list',
@@ -29,7 +32,10 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private router: Router,
-              private userService: UserService, private authService: AuthentificationService) { }
+              private userService: UserService, 
+              private authService: AuthentificationService,
+              private dialogService: DialogService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
   }
@@ -70,17 +76,21 @@ export class UserListComponent implements OnInit {
     }
   }
 
-   deleteUser(user: User) {
-     if(confirm("Are you sure to delete" + user.firstName + " "+ user.lastName )){
-      if (user) {
-      this.userService.deleteUser(user.id).subscribe(
-        res => {
-          this.getAllUsers();
-          this.router.navigate(['/users']);
+   deleteUser(user: User){
+    this.dialogService.openConfirmDialog("Are you sure to delete " + user.firstName + " "+ user.lastName + "?")
+    .afterClosed().subscribe(res =>{
+      if(res){
+        if (user) {
+          this.userService.deleteUser(user.id).subscribe(
+            res => {
+              this.getAllUsers();
+              this.router.navigate(['/users']);
+              this.notificationService.warn('Contact deleted');
+            }
+          );
         }
-      );
-    }
-    }
+      }
+    });
   }
 
   applyFilter(event: Event) {

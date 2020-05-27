@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from '../services/user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import  { routingComponents } from '../app-routing.module'
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { routingComponents } from '../app-routing.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './../../material/material.module';
+import { MatConfirmDialogComponent } from './../mat-confirm-dialog/mat-confirm-dialog.component';
 import { UniqueEmailValidatorDirective } from '../directives/unique-email-validator.directive';
 
 
@@ -24,6 +25,6 @@ import { UniqueEmailValidatorDirective } from '../directives/unique-email-valida
   providers:[
   	UserService
   ],
-  declarations: [routingComponents, UniqueEmailValidatorDirective]
+  declarations: [MatConfirmDialogComponent, routingComponents, UniqueEmailValidatorDirective]
 })
 export class UserModule { }
