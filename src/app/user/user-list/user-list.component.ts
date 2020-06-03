@@ -19,7 +19,7 @@ import { NotificationService } from '../../services/notification.service';
 export class UserListComponent implements OnInit {
 
   dataSource: MatTableDataSource<User>;
-  displayedColumns: string[] = ['id','firstName', 'lastName','phoneNumber', 'email'];
+  displayedColumns: string[] = ['id','firstName', 'lastName','phoneNumber', 'email', 'show'];
   users: User[];
   sortedData: User[];
 
@@ -105,8 +105,7 @@ export class UserListComponent implements OnInit {
   }
 
   isAdmin(){
-    if(this.authService.admin && !this.displayedColumns.includes('show')){
-      this.displayedColumns.push('show');
+    if(this.authService.admin && !this.displayedColumns.includes('update')){
         this.displayedColumns.push('update');
         this.displayedColumns.push('delete');
       }
