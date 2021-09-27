@@ -20,6 +20,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
   user: User;
   roles: string[];
   editForm: boolean = false;
+  selectedFile: File;
 
   userForm: FormGroup;
   private sub: any;
@@ -81,6 +82,8 @@ export class UserCreateComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.userForm.valid) {
+      const uploadImageData = new FormData();
+      uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name+'#'+this.userForm.controls['email'].value);
       if (this.id) {
         let user: User = new User(this.id,
           this.userForm.controls['firstName'].value,
@@ -99,8 +102,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
           this.userForm.controls['role'].value,
           this.userForm.controls['phoneNumber'].value);
-        this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);this.notificationService.success('Contact successfully added');},err => {console.log(err);});
-
+        this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);this.notificationService.success('Contact successfully added');this.userService.setUserPicture(uploadImageData).subscribe();},err => {console.log(err);});
       }
 
       this.userForm.reset();
@@ -123,5 +125,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
   redirectUserPage() {
     this.router.navigate(['/users']);
     this.notificationService.warn('No changes have been saved');
+  }
+
+  //Gets called when the user selects an image
+  public onFileChanged(event) {
+    //Select File
+    this.selectedFile = event.target.files[0];
   }
 }

@@ -25,6 +25,10 @@ export class UserService {
     return this.http.post(this.baseUrl + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, user);
   }
 
+  setUserPicture(picture: FormData) {
+    return this.http.post(this.baseUrl + '/upload' + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token,picture);
+  }
+
   updateUser(user: User) {
     return this.http.put(this.baseUrl + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, user);
   }
