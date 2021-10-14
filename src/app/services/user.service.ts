@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {User} from "../user/User";
+import {UserPicture} from "../user/UserPicture";
 import { Role } from '../user/role';
 
 @Injectable()
@@ -27,6 +28,10 @@ export class UserService {
 
   setUserPicture(picture: FormData) {
     return this.http.post(this.baseUrl + '/upload' + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token,picture);
+  }
+
+  getPictureByEmail(email: string) {
+    return this.http.get<UserPicture>(this.baseUrl + '/get/' + email + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
   }
 
   updateUser(user: User) {

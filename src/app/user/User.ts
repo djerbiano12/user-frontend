@@ -7,6 +7,7 @@ export class User {
   password: string;
   role: string;
   phoneNumber: string;
+  retrievedImage: any;
 
   constructor(id: number, firstName: string, lastName: string, email: string, password: string, role: string, phoneNumber: string){
     this.id = id;

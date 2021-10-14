@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from "../User";
+import {UserPicture} from "../UserPicture";
 import { UserService } from "../../services/user.service";
 import { AuthentificationService } from "../../services/authentification.service";
 import { Router } from '@angular/router';
@@ -52,6 +53,7 @@ export class UserListComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.sortedData = users.slice();
+        this.users = this.getPictures(this.users);
       },
       err => {
         console.log(err);
@@ -111,4 +113,21 @@ export class UserListComponent implements OnInit {
       }
      return this.authService.admin;
   }
+
+  getPictures(users: User[]){
+      let retrievedImage: any;
+      let base64Data: any;
+      let retrieveResonse: UserPicture;
+      for(let i=0; i<users.length; i++){
+          this.userService.getPictureByEmail(users[i].email).subscribe(
+            res => {
+              retrieveResonse = res;
+              base64Data = retrieveResonse.picByte;
+              retrievedImage = 'data:image/jpeg;base64,' + base64Data;
+              users[i].retrievedImage = retrievedImage;
+            }
+          );
+      }
+      return users;
+    }
 }

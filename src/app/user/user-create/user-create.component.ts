@@ -102,7 +102,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           this.EncrDecr.set('123456$#@$^@1ERF', this.userForm.controls['password'].value),
           this.userForm.controls['role'].value,
           this.userForm.controls['phoneNumber'].value);
-        this.userService.createUser(user).subscribe(users => {this.router.navigate(['/users']);this.notificationService.success('Contact successfully added');this.userService.setUserPicture(uploadImageData).subscribe();},err => {console.log(err);});
+        this.userService.createUser(user).subscribe(users => {this.notificationService.success('Contact successfully added');this.userService.setUserPicture(uploadImageData).subscribe();this.router.navigate(['/users']);},err => {console.log(err);});
       }
 
       this.userForm.reset();
